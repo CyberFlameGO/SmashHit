@@ -88,6 +88,8 @@ class SmashHitListener extends PacketAdapter {
 			/* The check above ensures we can roll our own hits */
 			e.setCancelled(true);
 
+			if(attacker.getLocation().distance(target.getLocation()) > 4) return;
+
 			/* Construct the fake packet for making the attacker's
 			 * victim appear hit */
 			PacketContainer damageAnimation = new PacketContainer(PacketType.Play.Server.ENTITY_STATUS);
