@@ -58,7 +58,19 @@ class SmashHitListener extends PacketAdapter {
 			while( hitQueue.size() > 0 ) {
 				EntityDamageByEntityEvent e = hitQueue.remove();
 				getPluginManager().callEvent(e);
-				if( !e.isCancelled() ) ( (Damageable)e.getEntity() ).damage( e.getFinalDamage(), e.getDamager() );
+				if( !e.isCancelled() ) (
+						(Damageable)e.getEntity() ).damage( e.getFinalDamage(), e.getDamager()
+				);
+				if (!e.isCancelled()) {
+					PacketContainer damageAnimation = new PacketContainer(PacketType.Play.Server.ENTITY_STATUS);
+					damageAnimation.getIntegers().write(0, e.getEntity().getEntityId());
+					damageAnimation.getBytes().write(0, (byte)2);
+					try {
+						pmgr.sendServerPacket((Player) e.getDamager(), damageAnimation);
+					} catch (InvocationTargetException invocationTargetException) {
+						invocationTargetException.printStackTrace();
+					}
+				}
 			}
 		}
 	}.runTaskTimer(SmashHit.getInstance(), 1, 1);
@@ -92,31 +104,29 @@ class SmashHitListener extends PacketAdapter {
 
 			/* Construct the fake packet for making the attacker's
 			 * victim appear hit */
-			PacketContainer damageAnimation = new PacketContainer(PacketType.Play.Server.ENTITY_STATUS);
-			damageAnimation.getIntegers().write(0, target.getEntityId());
-			damageAnimation.getBytes().write(0, (byte)2);
 
-			try {
-				double damage = damageResolver.getDamage(attacker, target);
 
-				AsyncPreDamageEvent damageEvent = new AsyncPreDamageEvent(attacker, target, damage);
-				getPluginManager().callEvent(damageEvent);
+			double damage = damageResolver.getDamage(attacker, target);
 
-				if( !damageEvent.isCancelled() ) {
+			AsyncPreDamageEvent damageEvent = new AsyncPreDamageEvent(attacker, target, damage);
+			getPluginManager().callEvent(damageEvent);
 
-					pmgr.sendServerPacket(attacker, damageAnimation);
+			if( !damageEvent.isCancelled() ) {
 
-					/* Check if attacker's CPS is within the specified maximum */
-					int attackerCps = cps.containsKey(attacker)? cps.get(attacker) : 0;
-					cps.put( attacker, attackerCps + 1 );
+				/*PacketContainer damageAnimation = new PacketContainer(PacketType.Play.Server.ENTITY_STATUS);
+				damageAnimation.getIntegers().write(0, target.getEntityId());
+				damageAnimation.getBytes().write(0, (byte)2);
+				pmgr.sendServerPacket(attacker, damageAnimation);*/
 
-					/* By handling CPS this way, the recorded CPS will still increment even if the limit is reached.
-					 * This should weed out some hackers nicely */
-					if(attackerCps <= MAX_CPS) hitQueue.add( new EntityDamageByEntityEvent( attacker, target, DamageCause.ENTITY_ATTACK, damageEvent.getDamage() ) );
-				}
+				/* Check if attacker's CPS is within the specified maximum */
+				int attackerCps = cps.containsKey(attacker)? cps.get(attacker) : 0;
+				cps.put( attacker, attackerCps + 1 );
 
+				/* By handling CPS this way, the recorded CPS will still increment even if the limit is reached.
+				 * This should weed out some hackers nicely */
+				if(attackerCps <= MAX_CPS) hitQueue.add( new EntityDamageByEntityEvent( attacker, target, DamageCause.ENTITY_ATTACK, damageEvent.getDamage() ) );
 			}
-			catch(InvocationTargetException err) { throw new RuntimeException("Error while sending damage packet: ", err); }
+
 		}
 	}
 
