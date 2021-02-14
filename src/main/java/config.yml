@@ -13,6 +13,5 @@ max-cps: 25
 max-reach: 3.0
 
 # Bridge to other PvP proteciton plugins
-# WorldGuard bridge is currently not stable.
 use-bridge:
   worldguard: true
