@@ -1,4 +1,4 @@
-# [SmashHit](https://www.spigotmc.org/resources/smashhitx.89170/)
+# [SmashHitX](https://www.spigotmc.org/resources/smashhitx.89170/)
 [Free Download](https://www.spigotmc.org/resources/smashhitx.89170/)
 
 
