@@ -1,0 +1,10 @@
+{
+  "versionFetcherClass": "dev.simplix.core.common.updater.UrlVersionFetcher",
+  "versionFetcher": {
+    "url": "https://pastebin.com/raw/j5APxSHc"
+  },
+  "downloaderClass": "dev.simplix.core.common.updater.UrlUpdateDownloader",
+  "downloader": {
+    "url": "https://steviebeenz.gitlab.io/SmashHitX_Download/SmashHit-1.0.0.jar"
+  }
+}

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: dev.simplix.core:simplixcore-minecraft-spigot-quickstart:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-minecraft-spigot-quickstart/1.0-SNAPSHOT/simplixcore-minecraft-spigot-quickstart-1.0-20201031.230503-55.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-minecraft-spigot-quickstart/1.0-SNAPSHOT/simplixcore-minecraft-spigot-quickstart-1.0-20201031.230503-55-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-minecraft-spigot-quickstart/1.0-SNAPSHOT/simplixcore-minecraft-spigot-quickstart-1.0-20201031.230503-55-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

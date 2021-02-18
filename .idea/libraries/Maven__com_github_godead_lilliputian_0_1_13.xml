@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.godead:lilliputian:0.1.13">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/godead/lilliputian/0.1.13/lilliputian-0.1.13.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/godead/lilliputian/0.1.13/lilliputian-0.1.13-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/godead/lilliputian/0.1.13/lilliputian-0.1.13-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

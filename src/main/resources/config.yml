@@ -7,10 +7,7 @@ enable-criticals: true
 old-criticals: false
 
 # How many clicks per second are we allowing?
-max-cps: 12
-
-# How many blocks of reach can players have?
-max-reach: 3.85
+max-cps: 25
 
 # Bridge to other PvP proteciton plugins
 # WorldGuard bridge is currently not stable.

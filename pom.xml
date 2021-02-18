@@ -14,12 +14,41 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>me.godead.lilliputian</pattern>
+                                    <shadedPattern>com.github.steviebeenz.SmashHitX.downloader</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jetbrains.annotations</pattern>
+                                    <shadedPattern>com.github.steviebeenz.SmashHitX.annotations</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.intellij.lang.annotations</pattern>
+                                    <shadedPattern>com.github.steviebeenz.SmashHitX.annotations</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
-    <groupId>com.frash23</groupId>
+    <groupId>com.github.steviebeenz</groupId>
     <artifactId>SmashHit</artifactId>
-    <version>1.0-RC2</version>
+    <version>1.0.0</version>
 
     <repositories>
         <repository>
@@ -33,6 +62,10 @@
         <repository>
             <id>spigot-repo</id>
             <url>https://repo.codemc.io/repository/nms/</url>
+        </repository>
+        <repository>
+            <id>SimplixPublic</id>
+            <url>https://repo.simplix.dev/repository/simplixsoft-public/</url>
         </repository>
     </repositories>
 
@@ -53,6 +86,41 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.godead</groupId>
+            <artifactId>lilliputian</artifactId>
+            <version>0.1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.10.0-RC1	</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.simplix.core</groupId>
+            <artifactId>simplixcore-minecraft-spigot-quickstart</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.simplix.core</groupId>
+            <artifactId>simplixcore-common-implementation</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

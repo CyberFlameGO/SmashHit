@@ -1,9 +1,9 @@
-name: SmashHit
-version: "1.0-RC2"
-author: "frash23"
+name: SmashHitX
+version: "0.0.1"
+author: "Steviebeenz"
 main: "com.frash23.smashhit.SmashHit"
-depend: [ ProtocolLib ]
-softdepend: [ WorldGuard ]
+depend: [  ]
+softdepend: [ WorldGuard, ProtocolLib, SimplixCore ]
 commands:
   smashhit:
     aliases: [ sh ]

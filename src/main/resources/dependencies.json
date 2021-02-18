@@ -1,0 +1,15 @@
+{
+  "repositories": [
+    {
+      "id": "jitpack",
+      "url": "https://jitpack.io"
+    }
+  ],
+  "dependencies": [
+    {
+      "groupId": "com.github.simplix-softworks",
+      "artifactId": "simplixstorage",
+      "version": "3.2.1"
+    }
+  ]
+}

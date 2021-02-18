@@ -3,10 +3,15 @@ package com.frash23.smashhit;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.async.AsyncListenerHandler;
+import com.github.steviebeenz.SmashHitX.Loader;
+import dev.simplix.core.common.inject.SimplixInstaller;
+import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.io.IOException;
 
 /**
  * SmashHit - Async hit preprocessor for the Bukkit API
@@ -31,10 +36,21 @@ public class SmashHit extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		instance = this;
+		try {
+			Loader.loadPlugin(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		if (!Bukkit.getVersion().contains("1.8.8")) {
+			getLogger().severe("THIS PLUGIN IS ONLY FOR VERSION 1.8.8");
+			return;
+		}
+		
 		pmgr = ProtocolLibrary.getProtocolManager();
-
 		getCommand("smashhit").setExecutor( new SmashHitCommand(this) );
 		reload();
+
 	}
 
 	@Override
@@ -57,8 +73,8 @@ public class SmashHit extends JavaPlugin implements Listener {
 							instance,
 							getConfig().getBoolean("enable-criticals"),
 							getConfig().getBoolean("old-criticals"),
-							getConfig().getInt("max-cps"),
-							getConfig().getDouble("max-reach")
+							getConfig().getInt("max-cps")//,
+							//getConfig().getDouble("max-reach")
 					) );
 
 					setHitListenerHandler( pmgr.getAsynchronousManager().registerAsyncHandler( getHitListener() ) );
@@ -126,5 +142,5 @@ public class SmashHit extends JavaPlugin implements Listener {
 	boolean isListening() { return listening; }
 	boolean isDebug() { return debugging; }
 
-	static SmashHit getInstance() { return instance; }
+	public static SmashHit getInstance() { return instance; }
 }

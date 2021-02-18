@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import static org.bukkit.Bukkit.getPlayer;
 import static org.bukkit.Bukkit.getPluginManager;
 
 class SmashHitListener extends PacketAdapter {
@@ -37,9 +38,9 @@ class SmashHitListener extends PacketAdapter {
 	private Queue<EntityDamageByEntityEvent> hitQueue = new ConcurrentLinkedQueue<>();
 
 	private static byte MAX_CPS;
-	private static float MAX_DISTANCE;
+	//private static float MAX_DISTANCE;
 
-	SmashHitListener(SmashHit pl, boolean useCrits, boolean oldCrits, int maxCps, double maxDistance) {
+	SmashHitListener(SmashHit pl, boolean useCrits, boolean oldCrits, int maxCps) {
 		super(pl, ListenerPriority.HIGH, Collections.singletonList( PacketType.Play.Client.USE_ENTITY) );
 
 		plugin = pl;
@@ -49,7 +50,7 @@ class SmashHitListener extends PacketAdapter {
 		if(damageResolver == null) throw new NullPointerException("Damage resolver is null, unsupported Spigot version?");
 
 		MAX_CPS = (byte)maxCps;
-		MAX_DISTANCE = (float)maxDistance * (float)maxDistance;
+		//MAX_DISTANCE = (float)maxDistance * (float)maxDistance;
 	}
 
 	private BukkitTask hitQueueProcessor = new BukkitRunnable() {
@@ -85,20 +86,29 @@ class SmashHitListener extends PacketAdapter {
 
 		PacketContainer packet = e.getPacket();
 		Player attacker = e.getPlayer();
+		if (e.isPlayerTemporary()) return;
+
 		Entity entity = packet.getEntityModifier(e).read(0);
 		Damageable target = entity instanceof Damageable? (Damageable)entity : null;
 		World world = attacker.getWorld();
+		try {
+			if (target.isDead()) return;
+		} catch(Throwable t) {return;}
+		if (!target.isValid()) return;
+		if (!target.isValid()) return;
+
 
 		/* Huge if() block to verify the hit request */
 		if(e.getPacketType() == PacketType.Play.Client.USE_ENTITY			// Packet is for entity interaction
 		&& packet.getEntityUseActions().read(0) == EntityUseAction.ATTACK	// Packet is for entity damage
 		&& target != null && !target.isDead()                       		// Target entity is damageable
 		&& world == target.getWorld() && world.getPVP() 					// Attacker & target are in the same world
-		&& attacker.getLocation().distanceSquared( target.getLocation() ) < MAX_DISTANCE 			// Distance sanity check
+		//&& attacker.getLocation().distanceSquared( target.getLocation() ) < MAX_DISTANCE 			// Distance sanity check
 		&& (!(target instanceof Player) || ((Player) target).getGameMode() != GameMode.CREATIVE)) { // Don't hit Players in creative mode
 
 			/* The check above ensures we can roll our own hits */
 			e.setCancelled(true);
+
 
 			if(attacker.getLocation().distance(target.getLocation()) > 4) return;
 

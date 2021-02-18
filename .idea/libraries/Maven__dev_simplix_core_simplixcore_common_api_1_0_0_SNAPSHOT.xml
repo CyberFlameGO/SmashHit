@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: dev.simplix.core:simplixcore-common-api:1.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-common-api/1.0.0-SNAPSHOT/simplixcore-common-api-1.0.0-20210217.230448-251.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-common-api/1.0.0-SNAPSHOT/simplixcore-common-api-1.0.0-20210217.230448-251-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-common-api/1.0.0-SNAPSHOT/simplixcore-common-api-1.0.0-20210217.230448-251-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
