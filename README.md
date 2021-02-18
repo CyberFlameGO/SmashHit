@@ -1,5 +1,7 @@
-SmashHit
-===
+# [SmashHit](https://www.spigotmc.org/resources/smashhitx.89170/)
+[Free Download](https://www.spigotmc.org/resources/smashhitx.89170/)
+
+
 Free async hit pre-processor for bukkit
 
 What's wrong with the default hit processor?
