@@ -38,7 +38,7 @@ class SmashHitListener extends PacketAdapter {
 	private Queue<EntityDamageByEntityEvent> hitQueue = new ConcurrentLinkedQueue<>();
 
 	private static byte MAX_CPS;
-	//private static float MAX_DISTANCE;
+	private static float MAX_DISTANCE;
 
 	SmashHitListener(SmashHit pl, boolean useCrits, boolean oldCrits, int maxCps) {
 		super(pl, ListenerPriority.HIGH, Collections.singletonList( PacketType.Play.Client.USE_ENTITY) );
@@ -50,7 +50,7 @@ class SmashHitListener extends PacketAdapter {
 		if(damageResolver == null) throw new NullPointerException("Damage resolver is null, unsupported Spigot version?");
 
 		MAX_CPS = (byte)maxCps;
-		//MAX_DISTANCE = (float)maxDistance * (float)maxDistance;
+		MAX_DISTANCE = (float)3 * (float)3;
 	}
 
 	private BukkitTask hitQueueProcessor = new BukkitRunnable() {
@@ -103,7 +103,7 @@ class SmashHitListener extends PacketAdapter {
 		&& packet.getEntityUseActions().read(0) == EntityUseAction.ATTACK	// Packet is for entity damage
 		&& target != null && !target.isDead()                       		// Target entity is damageable
 		&& world == target.getWorld() && world.getPVP() 					// Attacker & target are in the same world
-		//&& attacker.getLocation().distanceSquared( target.getLocation() ) < MAX_DISTANCE 			// Distance sanity check
+		&& attacker.getLocation().distanceSquared( target.getLocation() ) < MAX_DISTANCE 			// Distance sanity check
 		&& (!(target instanceof Player) || ((Player) target).getGameMode() != GameMode.CREATIVE)) { // Don't hit Players in creative mode
 
 			/* The check above ensures we can roll our own hits */

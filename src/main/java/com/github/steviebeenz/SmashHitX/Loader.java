@@ -31,52 +31,57 @@ public class Loader {
 
     public static void loadPlugin(SmashHit plugin) throws IOException {
         final Lilliputian lilliputian = new Lilliputian(plugin);
-        lilliputian.getDependencyBuilder()
-                // Jitpack
-                .addDependency(new Dependency(
-                        Repository.MAVENCENTRAL,
-                        "com.squareup.okhttp3",
-                        "okhttp",
-                        "4.10.0-RC1"))
-                .addDependency(new Dependency(
-                        Repository.MAVENCENTRAL,
-                        "com.squareup.okio",
-                        "okio",
-                        "2.10.0"))
-                /*.addDependency(new Dependency(
-                        "https://repo.simplix.dev/repository/simplixsoft-public/",
-                        "dev.simplix.core",
-                        "simplixcore-minecraft-spigot-quickstart",
-                        "1.0-SNAPSHOT"))*/
-                .addDependency(new Dependency(
-                        Repository.MAVENCENTRAL,
-                        "commons-io",
-                        "commons-io",
-                        "2.8.0"))
-                .addDependency(new Dependency(
-                        Repository.MAVENCENTRAL,
-                        "org.jetbrains.kotlin",
-                        "kotlin-stdlib",
-                        "1.4.30"))
-                .addDependency(new Dependency(
-                        Repository.MAVENCENTRAL,
-                        "commons-logging",
-                        "commons-logging",
-                        "1.2"))
-                .loadDependencies();
 
+        // ONLY LOAD DOWNLOADER DEPENDENCIES IF NEEDED
+        //TODO: MAKE SEPARATE DOWNLOADER CLASS
+        if (!Bukkit.getPluginManager().isPluginEnabled("SimplixCore") || !Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
+            lilliputian.getDependencyBuilder()
+                    // Jitpack
+                    .addDependency(new Dependency(
+                            Repository.MAVENCENTRAL,
+                            "com.squareup.okhttp3",
+                            "okhttp",
+                            "4.10.0-RC1"))
+                    .addDependency(new Dependency(
+                            Repository.MAVENCENTRAL,
+                            "com.squareup.okio",
+                            "okio",
+                            "2.10.0"))
+                    /*.addDependency(new Dependency(
+                            "https://repo.simplix.dev/repository/simplixsoft-public/",
+                            "dev.simplix.core",
+                            "simplixcore-minecraft-spigot-quickstart",
+                            "1.0-SNAPSHOT"))*/
+                    .addDependency(new Dependency(
+                            Repository.MAVENCENTRAL,
+                            "commons-io",
+                            "commons-io",
+                            "2.8.0"))
+                    .addDependency(new Dependency(
+                            Repository.MAVENCENTRAL,
+                            "org.jetbrains.kotlin",
+                            "kotlin-stdlib",
+                            "1.4.30"))
+                    .addDependency(new Dependency(
+                            Repository.MAVENCENTRAL,
+                            "commons-logging",
+                            "commons-logging",
+                            "1.2"))
+                    .loadDependencies();
+        }
+
+        // CHECK INSTALLED DEPENDENCIES
         if (!Bukkit.getPluginManager().isPluginEnabled("SimplixCore")) {
             downloadFileSync("https://ci.exceptionflug.de/job/SimplixCore/lastSuccessfulBuild/artifact/simplixcore-minecraft/simplixcore-minecraft-spigot/simplixcore-minecraft-spigot-plugin/target/SimplixCore-Spigot.jar", "plugins/SimplixCore.jar");
             PluginUtil.load("SimplixCore");
-            //
-
         }
-
         if (!Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
             downloadFileSync("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
             PluginUtil.load("ProtocolLib");
         }
 
+
+        // LOAD SIMPLIX CORE
         SimplixInstaller
                 .instance()
                 .register(
@@ -91,7 +96,6 @@ public class Loader {
 
 
     public static void downloadFileSync(String downloadUrl, String out) throws IOException {
-
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(downloadUrl).build();
         Response response = client.newCall(request).execute();

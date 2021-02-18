@@ -46,7 +46,7 @@ public class SmashHit extends JavaPlugin implements Listener {
 			getLogger().severe("THIS PLUGIN IS ONLY FOR VERSION 1.8.8");
 			return;
 		}
-		
+
 		pmgr = ProtocolLibrary.getProtocolManager();
 		getCommand("smashhit").setExecutor( new SmashHitCommand(this) );
 		reload();
