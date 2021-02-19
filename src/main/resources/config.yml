@@ -4,12 +4,15 @@
 enable-criticals: true
 # In 1.9, you can't achieve critical hits while sprinting.
 # Enable this to use pre-1.9 behavior
-old-criticals: false
+old-criticals: true
 
 # How many clicks per second are we allowing?
 max-cps: 25
 
 # Bridge to other PvP proteciton plugins
-# WorldGuard bridge is currently not stable.
+# WorldGuard bridge results in instant worldguard blocks rather than delayed ones
 use-bridge:
-  worldguard: false
+  worldguard: true
+
+# Anticheat Compat: makes the plugin work with Anticheats
+anticheat: true

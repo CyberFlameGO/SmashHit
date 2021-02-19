@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.steviebeenz.SpigetUpdater:Bukkit:master-39f2885855-1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

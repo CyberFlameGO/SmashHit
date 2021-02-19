@@ -38,6 +38,11 @@
                                     <pattern>org.intellij.lang.annotations</pattern>
                                     <shadedPattern>com.github.steviebeenz.SmashHitX.annotations</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <!-- Replace this with your package! -->
+                                    <shadedPattern>com.github.steviebeenz.SmashHitX.stats</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
@@ -67,9 +72,19 @@
             <id>SimplixPublic</id>
             <url>https://repo.simplix.dev/repository/simplixsoft-public/</url>
         </repository>
+        <repository>
+            <id>inventive-repo</id>
+            <url>https://repo.inventivetalent.org/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.steviebeenz.SpigetUpdater</groupId>
+            <artifactId>Bukkit</artifactId>
+            <version>master-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.github.dmulloy2</groupId>
             <artifactId>ProtocolLib</artifactId>
@@ -122,6 +137,12 @@
             <artifactId>simplixcore-common-implementation</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>2.2.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

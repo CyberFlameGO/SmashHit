@@ -17,6 +17,11 @@
       <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="inventive-repo" />
+      <option name="name" value="inventive-repo" />
+      <option name="url" value="https://repo.inventivetalent.org/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="dmulloy2-repo" />
       <option name="name" value="dmulloy2-repo" />
       <option name="url" value="http://repo.dmulloy2.net/content/groups/public/" />

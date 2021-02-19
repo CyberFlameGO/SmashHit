@@ -10,6 +10,11 @@
       "groupId": "com.github.simplix-softworks",
       "artifactId": "simplixstorage",
       "version": "3.2.1"
+    },
+    {
+      "groupId": "com.github.steviebeenz.SpigetUpdater",
+      "artifactId": "Bukkit",
+      "version": "master-SNAPSHOT"
     }
   ]
 }

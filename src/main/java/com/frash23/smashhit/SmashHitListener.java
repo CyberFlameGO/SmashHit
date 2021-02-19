@@ -9,6 +9,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.EnumWrappers.EntityUseAction;
 import com.frash23.smashhit.damageresolver.DamageResolver;
+import com.github.steviebeenz.SmashHitX.SmashHitX;
 import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Damageable;
@@ -50,7 +51,12 @@ class SmashHitListener extends PacketAdapter {
 		if(damageResolver == null) throw new NullPointerException("Damage resolver is null, unsupported Spigot version?");
 
 		MAX_CPS = (byte)maxCps;
+
 		MAX_DISTANCE = (float)3 * (float)3;
+		if (!SmashHit.getInstance().getConfig().getBoolean("anticheat", true)) {
+			MAX_DISTANCE = (float)6 * (float)6;
+		}
+
 	}
 
 	private BukkitTask hitQueueProcessor = new BukkitRunnable() {
@@ -103,14 +109,19 @@ class SmashHitListener extends PacketAdapter {
 		&& packet.getEntityUseActions().read(0) == EntityUseAction.ATTACK	// Packet is for entity damage
 		&& target != null && !target.isDead()                       		// Target entity is damageable
 		&& world == target.getWorld() && world.getPVP() 					// Attacker & target are in the same world
-		&& attacker.getLocation().distanceSquared( target.getLocation() ) < MAX_DISTANCE 			// Distance sanity check
 		&& (!(target instanceof Player) || ((Player) target).getGameMode() != GameMode.CREATIVE)) { // Don't hit Players in creative mode
 
 			/* The check above ensures we can roll our own hits */
 			e.setCancelled(true);
 
+			//attacker.getLocation().distanceSquared( target.getLocation() ) < MAX_DISTANCE
+			if (attacker.getLocation().distanceSquared( target.getLocation() ) > MAX_DISTANCE) {
+				return;
+			}
 
-			if(attacker.getLocation().distance(target.getLocation()) > 4) return;
+			if (!SmashHit.getInstance().getConfig().getBoolean("anticheat", true) && attacker.getLocation().distance(target.getLocation()) > 4) {
+				return;
+			}
 
 			/* Construct the fake packet for making the attacker's
 			 * victim appear hit */

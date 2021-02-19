@@ -6,10 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SmashHit" />
+        <module name="NMS" />
+        <module name="NMS_1_7" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="NMS" target="1.8" />
+      <module name="NMS_1_7" target="1.8" />
       <module name="SmashHit" target="1.8" />
     </bytecodeTargetLevel>
   </component>

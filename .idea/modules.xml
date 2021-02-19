@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/NMS/NMS.iml" filepath="$PROJECT_DIR$/NMS/NMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NMS_1_7/NMS_1_7.iml" filepath="$PROJECT_DIR$/NMS_1_7/NMS_1_7.iml" />
       <module fileurl="file://$PROJECT_DIR$/SmashHit.iml" filepath="$PROJECT_DIR$/SmashHit.iml" />
     </modules>
   </component>

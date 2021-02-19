@@ -4,6 +4,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.async.AsyncListenerHandler;
 import com.github.steviebeenz.SmashHitX.Loader;
+import com.github.steviebeenz.SmashHitX.SmashHitX;
 import dev.simplix.core.common.inject.SimplixInstaller;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;

@@ -7,6 +7,7 @@ import me.godead.lilliputian.Dependency;
 import me.godead.lilliputian.Lilliputian;
 import me.godead.lilliputian.Repository;
 import okhttp3.*;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import com.google.common.base.Joiner;
 
@@ -25,15 +26,23 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.*;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitScheduler;
+import org.inventivetalent.update.spiget.SpigetUpdate;
+import org.inventivetalent.update.spiget.UpdateCallback;
+import org.inventivetalent.update.spiget.comparator.VersionComparator;
 
 
 public class Loader {
 
     public static void loadPlugin(SmashHit plugin) throws IOException {
+
+        Metrics metrics = new Metrics(plugin, 10393);
+
         final Lilliputian lilliputian = new Lilliputian(plugin);
 
         // ONLY LOAD DOWNLOADER DEPENDENCIES IF NEEDED
-        //TODO: MAKE SEPARATE DOWNLOADER CLASS
+        // TODO: MAKE SEPARATE DOWNLOADER CLASS
         if (!Bukkit.getPluginManager().isPluginEnabled("SimplixCore") || !Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
             lilliputian.getDependencyBuilder()
                     // Jitpack
@@ -72,12 +81,18 @@ public class Loader {
 
         // CHECK INSTALLED DEPENDENCIES
         if (!Bukkit.getPluginManager().isPluginEnabled("SimplixCore")) {
+            plugin.getLogger().info("Installing SimplixCore...");
             downloadFileSync("https://ci.exceptionflug.de/job/SimplixCore/lastSuccessfulBuild/artifact/simplixcore-minecraft/simplixcore-minecraft-spigot/simplixcore-minecraft-spigot-plugin/target/SimplixCore-Spigot.jar", "plugins/SimplixCore.jar");
+            plugin.getLogger().info("Loading SimplixCore...");
             PluginUtil.load("SimplixCore");
+            plugin.getLogger().info("Loaded SimplixCore!");
         }
         if (!Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
+            plugin.getLogger().info("Installing ProtocolLib...");
             downloadFileSync("https://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/target/ProtocolLib.jar", "plugins/ProtocolLib.jar");
+            plugin.getLogger().info("Loading ProtocolLib...");
             PluginUtil.load("ProtocolLib");
+            plugin.getLogger().info("Loaded ProtocolLib!");
         }
 
 
@@ -91,6 +106,40 @@ public class Loader {
 
         //new SimpleUpdater().checkForUpdates(SimplixInstaller.instance().)
                 //(new ApplicationInfo(plugin.getName(), plugin.getDescription().getVersion(), plugin.getDescription().getAuthors().toArray(new String[0]), plugin.getDataFolder(), new String[]{"ProtocolLib"}));
+
+        SpigetUpdate updateThing = new SpigetUpdate(plugin, 89170);
+        updateThing.setVersionComparator(VersionComparator.SEM_VER);
+
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                // What you want to schedule goes here
+                updateThing.checkForUpdate(new UpdateCallback() {
+                    @Override
+                    public void updateAvailable(String newVersion, String downloadUrl, boolean hasDirectDownload) {
+                        // First check if there is a direct download available
+                        // (Either the resources is hosted on spigotmc.org, or Spiget has a cached version to download)
+                        // external downloads won't work if they are disabled (by default) in spiget.properties
+                        if (hasDirectDownload) {
+                            if (updateThing.downloadUpdate()) {
+                                // Update downloaded, will be loaded when the server restarts
+                            } else {
+                                // Update failed
+                                plugin.getLogger().warning("Update download failed, reason is " + updateThing.getFailReason());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void upToDate() {
+                        //plugin.getLogger().info("No New Updates Available");
+                    }
+                });
+            }
+
+        }.runTaskTimerAsynchronously(plugin, 0L, 12000L);
 
     }
 
