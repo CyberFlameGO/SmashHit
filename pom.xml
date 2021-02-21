@@ -81,8 +81,8 @@
     <dependencies>
         <dependency>
             <groupId>com.github.steviebeenz.SpigetUpdater</groupId>
-            <artifactId>Bukkit</artifactId>
-            <version>master-SNAPSHOT</version>
+            <artifactId>bukkit</artifactId>
+            <version>master-39f2885855-1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

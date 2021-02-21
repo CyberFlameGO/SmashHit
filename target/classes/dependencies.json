@@ -13,8 +13,8 @@
     },
     {
       "groupId": "com.github.steviebeenz.SpigetUpdater",
-      "artifactId": "Bukkit",
-      "version": "master-SNAPSHOT"
+      "artifactId": "bukkit",
+      "version": "master-39f2885855-1"
     }
   ]
 }
