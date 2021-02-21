@@ -19,35 +19,35 @@ class SmashHitCommand implements CommandExecutor {
 		switch( subcmd.toLowerCase() ) {
 			case "reload":
 				plugin.reload();
-				sender.sendMessage("§aSmashHit §2» §7Reloaded");
+				sender.sendMessage("Â§aSmashHit Â§2Â§ Â§7Reloaded");
 			return true;
 
 			case "toggle":
 				if( plugin.isListening() ) {
 					plugin.unregisterHitListener();
-					sender.sendMessage("§aSmashHit disabled");
+					sender.sendMessage("Â§aSmashHit disabled");
 				} else {
 					plugin.registerHitListener();
-					sender.sendMessage("§aSmashHit enabled");
+					sender.sendMessage("Â§aSmashHit enabled");
 				}
 			return true;
 
 			case "debug":
 				if( plugin.isDebug() ) {
 					plugin.unregisterDebugListener();
-					sender.sendMessage("§aSmashHit debug disabled");
+					sender.sendMessage("Â§aSmashHit debug disabled");
 				} else {
 					plugin.registerDebugListener();
-					sender.sendMessage("§aSmashHit debug enabled");
+					sender.sendMessage("Â§aSmashHit debug enabled");
 				}
 			return true;
 
 			default:
 				sender.sendMessage(new String[]{
-						"§2SmashHit v§a1.0-RC2",
-						"§a/sh help §7- Show this message",
-						"§a/sh reload §7- Reload config & restart hit interception",
-						"§a/sh toggle §7- Disable/enable hit interception"
+						"Â§2SmashHit vÂ§a1.0-RC2",
+						"Â§a/sh help Â§7- Show this message",
+						"Â§a/sh reload Â§7- Reload config & restart hit interception",
+						"Â§a/sh toggle Â§7- Disable/enable hit interception"
 				});
 			return true;
 		}

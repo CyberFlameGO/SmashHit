@@ -5,8 +5,10 @@
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1-sources.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/com/github/steviebeenz/SpigetUpdater/bukkit/master-39f2885855-1/bukkit-master-39f2885855-1-sources.jar!/" />
     </SOURCES>
   </library>

@@ -43,8 +43,9 @@ public class SmashHit extends JavaPlugin implements Listener {
 			e.printStackTrace();
 			return;
 		}
-		if (!Bukkit.getVersion().contains("1.8.8")) {
-			getLogger().severe("THIS PLUGIN IS ONLY FOR VERSION 1.8.8");
+		if (!Bukkit.getVersion().contains("1.8.8") && !Bukkit.getVersion().contains("1.12.2")) {
+			getLogger().severe("THIS PLUGIN IS ONLY FOR VERSIONS 1.8.8 and 1.12.*");
+			Bukkit.getPluginManager().disablePlugin(this);
 			return;
 		}
 

@@ -10,6 +10,7 @@ com\frash23\smashhit\SmashHitListener.class
 com\frash23\smashhit\SmashHit.class
 com\frash23\smashhit\SmashHitCommand.class
 com\github\steviebeenz\SmashHitX\Loader$PluginUtil.class
+com\frash23\smashhit\damageresolver\DamageResolver_1_12_R1.class
 com\github\steviebeenz\SmashHitX\SmashHitX.class
 com\frash23\smashhit\SmashHitListener$1.class
 com\frash23\smashhit\AsyncPreDamageEvent.class

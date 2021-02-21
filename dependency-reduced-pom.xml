@@ -96,6 +96,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>com.destroystokyo.paper</groupId>
+      <artifactId>paper</artifactId>
+      <version>1.12.2-R0.1-20190714.184445-253</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
       <version>4.10.0-RC1</version>
